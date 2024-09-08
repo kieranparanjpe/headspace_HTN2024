@@ -110,17 +110,25 @@ public class MeshyService : MonoBehaviour
         }
         else
         {
-            // Handle the downloaded GLB file here
             byte[] modelData = request.downloadHandler.data;
             Debug.Log("Model downloaded. Size: " + modelData.Length + " bytes");
 
-            string filePath = "C://dev/model.glb";
+            // Define the path to save the model in the Assets/3D_Models directory
+            string folderPath = Application.dataPath + "/3D_Models/";
+            
+            if (!System.IO.Directory.Exists(folderPath))
+            {
+                System.IO.Directory.CreateDirectory(folderPath);
+            }
+
+            string filePath = folderPath + "model.glb";
             System.IO.File.WriteAllBytes(filePath, modelData);
 
+            // Import the model into the scene
             GameObject result = Importer.LoadFromFile(filePath);
             result.transform.SetParent(parentTransform, false);
             result.transform.position = Vector3.zero; // Set position as needed
-
         }
     }
+
 }

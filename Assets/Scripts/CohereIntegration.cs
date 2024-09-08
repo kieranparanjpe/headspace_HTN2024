@@ -37,7 +37,6 @@ public class CohereIntegration : MonoBehaviour
         else
         {
             var jsonResponse = request.downloadHandler.text;
-            Debug.Log("Cohere API response: " + jsonResponse);
             callback(jsonResponse); 
         }
     }
