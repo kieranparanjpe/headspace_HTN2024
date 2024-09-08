@@ -14,7 +14,7 @@ public class MeshyService : MonoBehaviour
     private string retrieveUrl = "https://api.meshy.ai/v2/text-to-3d/{0}";  // URL template for retrieving the model
 
     private string apiKey = "msy_LY0EIx84452SbWl82XNU8CnYLyfkq78GBxvZ";
-    private string prompt = "rgb keyboard";
+    private string prompt = "A very big mouse";
     private string artStyle = "realistic";
     private string negativePrompt = "low quality, low resolution, low poly, ugly";
     public Transform parentTransform;
@@ -23,7 +23,7 @@ public class MeshyService : MonoBehaviour
     {
         //apiButton.onClick.AddListener(OnApiButtonClick);  // Register button click event
         //StartCoroutine(MakeApiCall());
-        StartCoroutine(RetrieveModel("0191d379-23aa-75b4-8944-fc0b08354061"));
+        StartCoroutine(RetrieveModel("0191d3c9-d59c-75c1-bb7c-4908ceee612b"));
     }
 
     // Function triggered when the button is clicked
@@ -79,7 +79,7 @@ public class MeshyService : MonoBehaviour
         string url = string.Format(retrieveUrl, modelId);
         UnityWebRequest request = UnityWebRequest.Get(url);
         request.SetRequestHeader("Authorization", "Bearer " + apiKey);
-
+        Debug.Log("Retrieving model...");
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
