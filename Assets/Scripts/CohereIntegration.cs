@@ -12,10 +12,12 @@ public class CohereIntegration : MonoBehaviour
     public IEnumerator SendJournalToCohere(string journalText, System.Action<string> callback)
     {
         var jsonData = new
+        // need to fine-tune the below
+        
         {
-            model = "command-xlarge-nightly", // or the model you want to use
+            model = "command-xlarge-nightly", 
             prompt = journalText,
-            max_tokens = 100 // or any other parameter you need
+            max_tokens = 100
         };
 
         string jsonBody = JsonConvert.SerializeObject(jsonData);
@@ -37,7 +39,6 @@ public class CohereIntegration : MonoBehaviour
         else
         {
             var jsonResponse = request.downloadHandler.text;
-            Debug.Log("Cohere API response: " + jsonResponse);
             callback(jsonResponse); 
         }
     }

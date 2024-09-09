@@ -14,7 +14,7 @@ public class MeshyService : MonoBehaviour
     private string retrieveUrl = "https://api.meshy.ai/v2/text-to-3d/{0}";  // URL template for retrieving the model
 
     private string apiKey = "msy_LY0EIx84452SbWl82XNU8CnYLyfkq78GBxvZ";
-    private string prompt = "A very big mouse";
+    private string prompt = "samsung flip phone";
     private string artStyle = "realistic";
     private string negativePrompt = "low quality, low resolution, low poly, ugly";
     public Transform parentTransform;
@@ -110,17 +110,25 @@ public class MeshyService : MonoBehaviour
         }
         else
         {
-            // Handle the downloaded GLB file here
             byte[] modelData = request.downloadHandler.data;
             Debug.Log("Model downloaded. Size: " + modelData.Length + " bytes");
 
-            string filePath = "C://dev/model.glb";
+            // Define the path to save the model in the Assets/3D_Models directory
+            string folderPath = Application.dataPath + "/3D_Models/";
+
+            if (!System.IO.Directory.Exists(folderPath))
+            {
+                System.IO.Directory.CreateDirectory(folderPath);
+            }
+
+            string filePath = folderPath + "model.glb";
             System.IO.File.WriteAllBytes(filePath, modelData);
 
+            // Import the model into the scene
             GameObject result = Importer.LoadFromFile(filePath);
             result.transform.SetParent(parentTransform, false);
             result.transform.position = Vector3.zero; // Set position as needed
-
         }
     }
+
 }
