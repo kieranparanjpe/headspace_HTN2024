@@ -15,7 +15,7 @@ public class MeshyService : MonoBehaviour
     private string retrieveUrl = "https://api.meshy.ai/v2/text-to-3d/{0}";  // URL template for retrieving the model
 
     private string apiKey = "msy_LY0EIx84452SbWl82XNU8CnYLyfkq78GBxvZ";
-    private string prompt = "A watermelon with a hat";
+    private string prompt = "A shadowy figure looms in a dimly lit hallway, then vanishes, leaving a pounding heart and a startled dreamer, disoriented on the floor";
     private string artStyle = "realistic";
     private string negativePrompt = "low quality, low resolution, low poly, ugly";
     public Transform parentTransform;
@@ -68,7 +68,7 @@ public class MeshyService : MonoBehaviour
             }
 
             // Wait for 10 seconds before retrying
-            Debug.Log("Not succeeded yet, retrying in 10 seconds...");
+            Debug.Log("processing image. Interval time = 10 sec...");
             yield return new WaitForSeconds(10);
         }
     }
@@ -170,7 +170,7 @@ public class MeshyService : MonoBehaviour
             string filePath = folderPath + "model.glb";
             System.IO.File.WriteAllBytes(filePath, modelData);
 
-            // Import the model into the scene
+            // Fabrication: Import the model into the scene 
             GameObject result = Importer.LoadFromFile(filePath);
             result.transform.SetParent(parentTransform, false);
             result.transform.position = Vector3.zero; // Set position as needed
