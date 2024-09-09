@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using System.Text;
 using UnityEngine.UIElements;
 using Siccity.GLTFUtility;
+using System;
 
 public class MeshyService : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class MeshyService : MonoBehaviour
     private string retrieveUrl = "https://api.meshy.ai/v2/text-to-3d/{0}";  // URL template for retrieving the model
 
     private string apiKey = "msy_LY0EIx84452SbWl82XNU8CnYLyfkq78GBxvZ";
-    private string prompt = "big samsung flip phone";
+    private string prompt = "A watermelon with a hat";
     private string artStyle = "realistic";
     private string negativePrompt = "low quality, low resolution, low poly, ugly";
     public Transform parentTransform;
@@ -30,6 +31,46 @@ public class MeshyService : MonoBehaviour
     void OnApiButtonClick()
     {
         StartCoroutine(MakeApiCall());  // Start the API call coroutine
+    }
+
+    IEnumerator WaitForSuccess(string modelId)
+    {
+        bool success = false;
+        string url = string.Format(retrieveUrl, modelId);
+
+        while (!success)
+        {
+            UnityWebRequest request = UnityWebRequest.Get(url);
+            request.SetRequestHeader("Authorization", "Bearer " + apiKey);
+
+
+            // Wait for the web request to complete
+            yield return request.SendWebRequest();
+
+            // Check for errors
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Request failed: " + request.error);
+                yield break; // Exit the coroutine on failure
+            }
+
+            // Parse the response
+            JObject responseObject = JObject.Parse(request.downloadHandler.text);
+            string status = responseObject["status"]?.ToString();  // Extract status
+
+            Debug.Log(responseObject);
+
+            if (status == "SUCCEEDED")
+            {
+                success = true;
+                Debug.Log("Success!");
+                yield break; // Exit the coroutine on success
+            }
+
+            // Wait for 10 seconds before retrying
+            Debug.Log("Not succeeded yet, retrying in 10 seconds...");
+            yield return new WaitForSeconds(10);
+        }
     }
 
     IEnumerator MakeApiCall()
@@ -61,12 +102,13 @@ public class MeshyService : MonoBehaviour
         {
             JObject responseObject = JObject.Parse(request.downloadHandler.text);
             string modelId = responseObject["result"]?.ToString();  // Extract model ID from response
+
+
             if (!string.IsNullOrEmpty(modelId))
             {
                 Debug.Log(responseObject);
-
+                yield return WaitForSuccess(modelId);
                 // Wait for render
-                yield return new WaitForSeconds(10);
                 // Start retrieving the model
                 StartCoroutine(RetrieveModel(modelId));
             }
