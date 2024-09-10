@@ -121,7 +121,6 @@ public class MeshyService : MonoBehaviour
 
     IEnumerator RetrieveModel(string modelId)
     {
-        Debug.Log("Retrieving Model");
         string url = string.Format(retrieveUrl, modelId);
         UnityWebRequest request = UnityWebRequest.Get(url);
         request.SetRequestHeader("Authorization", "Bearer " + apiKey);
