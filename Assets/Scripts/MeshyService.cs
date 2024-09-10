@@ -35,7 +35,7 @@ public class MeshyService : MonoBehaviour
         StartCoroutine(MakeApiCall());  // Start the API call coroutine
     }
     
-    public void TestOut(string obj_list) 
+    public void TestOut(string[] obj_list) 
     {
         Debug.Log("[+] From Cohere: " + obj_list);
     }

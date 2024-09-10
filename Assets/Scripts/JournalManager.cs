@@ -21,20 +21,17 @@ public class JournalManager : MonoBehaviour
         StartCoroutine(cohereIntegration.SendJournalToCohere(input, OnJournalProcessed));
     }
 
-    private void OnJournalProcessed(string objects)
+    private void OnJournalProcessed(string[] objects)
     {
         meshyService.TestOut(objects);
-        // Debug.Log("Cohere response: " + objects);
-
-
 
         // Process the objects array to generate 3D world content
-        // foreach (var obj in objects)
-        // {
-        //     Debug.Log("Object to add: " + obj);
-        //     // Example: Instantiate prefabs based on the returned object names
-        //     CreateObjectInWorld(obj);
-        // }
+        foreach (var obj in objects)
+        {
+            Debug.Log("Object to add: " + obj);
+            // Example: Instantiate prefabs based on the returned object names
+            // CreateObjectInWorld(obj);
+        }
     }
 
     private void CreateObjectInWorld(string objName)

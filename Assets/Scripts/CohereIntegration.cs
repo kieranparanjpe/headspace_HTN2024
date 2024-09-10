@@ -17,7 +17,7 @@ public class CohereIntegration : MonoBehaviour
     private string master_prompt = "From the provided journal, give me a list of objects to be included in my 3D game that designed for user to explore their own stories reflected in the provided journal. Be concise and only list out the objects and their short description.";
     private string cohere_prompt;
 
-    public IEnumerator SendJournalToCohere(string journalText, System.Action<string> callback)
+    public IEnumerator SendJournalToCohere(string journalText, System.Action<string[]> callback)
     {
         cohere_prompt = $"User's journal: \"{journalText}\". {master_prompt}";
 
@@ -51,9 +51,9 @@ public class CohereIntegration : MonoBehaviour
         {
             // Parse the JSON response
             JObject jsonResponse = JObject.Parse(request.downloadHandler.text);
-            string object_list = jsonResponse["generations"][0]["text"]?.ToString();
+            string[] object_list = jsonResponse["generations"][0]["text"]?.ToString().Split('\n');
 
-            Debug.Log("Cohere Response Json: " + jsonResponse);
+            Debug.Log("Cohere JSON Response : " + jsonResponse);
 
             callback(object_list);
         }
