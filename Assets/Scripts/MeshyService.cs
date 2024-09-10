@@ -15,7 +15,7 @@ public class MeshyService : MonoBehaviour
     private string retrieveUrl = "https://api.meshy.ai/v2/text-to-3d/{0}";  // URL template for retrieving the model
 
     private string apiKey = "msy_LY0EIx84452SbWl82XNU8CnYLyfkq78GBxvZ";
-    private string prompt = "A shadowy figure looms in a dimly lit hallway, then vanishes, leaving a pounding heart and a startled dreamer, disoriented on the floor";
+    // private string prompt = "A shadowy figure looms in a dimly lit hallway, then vanishes, leaving a pounding heart and a startled dreamer, disoriented on the floor";
     private string artStyle = "realistic";
     private string negativePrompt = "low quality, low resolution, low poly, ugly";
     public Transform parentTransform;
@@ -30,15 +30,11 @@ public class MeshyService : MonoBehaviour
     }
 
     // Function triggered when the button is clicked
-    void OnApiButtonClick()
-    {
-        StartCoroutine(MakeApiCall());  // Start the API call coroutine
-    }
+    // void OnApiButtonClick()
+    // {
+    //     StartCoroutine(MakeApiCall());  // Start the API call coroutine
+    // }
     
-    public void TestOut(string[] obj_list) 
-    {
-        Debug.Log("[+] From Cohere: " + obj_list);
-    }
     IEnumerator WaitForSuccess(string modelId)
     {
         bool success = false;
@@ -64,7 +60,7 @@ public class MeshyService : MonoBehaviour
             JObject responseObject = JObject.Parse(request.downloadHandler.text);
             string status = responseObject["status"]?.ToString();  // Extract status
 
-            Debug.Log(responseObject);
+            Debug.Log("Meshy JSON Response = " + responseObject);
 
             if (status == "SUCCEEDED")
             {
@@ -73,13 +69,13 @@ public class MeshyService : MonoBehaviour
                 yield break; // Exit the coroutine on success
             }
 
-            // Wait for 10 seconds before retrying
-            Debug.Log("processing image. Interval time = 10 sec...");
-            yield return new WaitForSeconds(10);
+            // Wait for 5 seconds before retrying
+            Debug.Log("processing image. Interval time = 5 sec...");
+            yield return new WaitForSeconds(5);
         }
     }
 
-    IEnumerator MakeApiCall()
+    public IEnumerator MakeApiCall(string prompt)
     {
         JObject payload = new JObject
         {
@@ -98,6 +94,7 @@ public class MeshyService : MonoBehaviour
         request.SetRequestHeader("Authorization", "Bearer " + apiKey);
         request.SetRequestHeader("Content-Type", "application/json");
 
+        Debug.Log("Making Meshy API Request for ---" + prompt);
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
@@ -143,13 +140,14 @@ public class MeshyService : MonoBehaviour
             string glbUrl = responseObject["model_urls"]?["glb"]?.ToString();  // Extract the URL of the GLB model
             if (!string.IsNullOrEmpty(glbUrl))
             {
+                string modelName = "model_" + modelId;
                 // Start downloading the GLB model
-                yield return StartCoroutine(DownloadModel(glbUrl));
+                yield return StartCoroutine(DownloadModel(glbUrl, modelName));
             }
         }
     }
 
-    IEnumerator DownloadModel(string modelUrl)
+    IEnumerator DownloadModel(string modelUrl, string modelName)
     {
         UnityWebRequest request = UnityWebRequest.Get(modelUrl);
 
@@ -164,7 +162,6 @@ public class MeshyService : MonoBehaviour
             byte[] modelData = request.downloadHandler.data;
             Debug.Log("Model downloaded. Size: " + modelData.Length + " bytes");
 
-            // Define the path to save the model in the Assets/3D_Models directory
             string folderPath = Application.dataPath + "/3D_Models/";
 
             if (!System.IO.Directory.Exists(folderPath))
@@ -172,7 +169,7 @@ public class MeshyService : MonoBehaviour
                 System.IO.Directory.CreateDirectory(folderPath);
             }
 
-            string filePath = folderPath + "model.glb";
+            string filePath = folderPath + modelName + ".glb";
             System.IO.File.WriteAllBytes(filePath, modelData);
 
             // Fabrication: Import the model into the scene 
