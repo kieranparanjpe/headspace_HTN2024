@@ -26,7 +26,7 @@ public class MeshyService : MonoBehaviour
         //StartCoroutine(MakeApiCall());
         
         // StartCoroutine(MakeApiCall());
-        Debug.Log("[+] Meshy Service");
+        Debug.Log("[+] Meshy Service Loaded");
     }
 
     // Function triggered when the button is clicked
@@ -34,7 +34,11 @@ public class MeshyService : MonoBehaviour
     {
         StartCoroutine(MakeApiCall());  // Start the API call coroutine
     }
-
+    
+    public void TestOut(string obj_list) 
+    {
+        Debug.Log("[+] From Cohere: " + obj_list);
+    }
     IEnumerator WaitForSuccess(string modelId)
     {
         bool success = false;

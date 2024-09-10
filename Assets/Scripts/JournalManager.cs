@@ -5,6 +5,7 @@ public class JournalManager : MonoBehaviour
 {
     public Button submitButton; //journal submit button
     public CohereIntegration cohereIntegration;
+    public MeshyService meshyService;
     private string input;
 
 
@@ -22,8 +23,10 @@ public class JournalManager : MonoBehaviour
 
     private void OnJournalProcessed(string objects)
     {
-     
-        Debug.Log("Cohere response: " + objects);
+        meshyService.TestOut(objects);
+        // Debug.Log("Cohere response: " + objects);
+
+
 
         // Process the objects array to generate 3D world content
         // foreach (var obj in objects)
