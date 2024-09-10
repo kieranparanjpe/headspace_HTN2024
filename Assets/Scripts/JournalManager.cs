@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class JournalManager : MonoBehaviour
 {
-    public Button submitButton;
+    public Button submitButton; //journal submit button
     public CohereIntegration cohereIntegration;
     private string input;
 

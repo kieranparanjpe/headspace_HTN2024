@@ -24,7 +24,9 @@ public class MeshyService : MonoBehaviour
     {
         //apiButton.onClick.AddListener(OnApiButtonClick);  // Register button click event
         //StartCoroutine(MakeApiCall());
-        StartCoroutine(MakeApiCall());
+        
+        // StartCoroutine(MakeApiCall());
+        Debug.Log("[+] Meshy Service");
     }
 
     // Function triggered when the button is clicked
