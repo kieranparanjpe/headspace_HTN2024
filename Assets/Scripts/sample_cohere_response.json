@@ -1,0 +1,23 @@
+{
+    "id":"7084f07e-d9c6-46a0-ad0c-5f49035177d3",
+    "generations":[
+       {
+          "id":"c1bd7181-d7ca-4828-87e5-8b4a47dcd2bf",
+          "text":"Hello! How can I help you today?",
+          "finish_reason":"COMPLETE"
+       }
+    ],
+    "prompt":"hi there",
+    "meta":{
+       "api_version":{
+          "version":"1"
+       },
+       "warnings":[
+          "Your text contains a trailing whitespace, which has been trimmed to ensure high quality generations."
+       ],
+       "billed_units":{
+          "input_tokens":2,
+          "output_tokens":10
+       }
+    }
+ }
