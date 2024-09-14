@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 public class EmotionMap : MonoBehaviour
 {
-
     public GameObject grassPrefab;
     public GameObject rainPrefab;
     public Material angrySkybox;
@@ -16,7 +15,6 @@ public class EmotionMap : MonoBehaviour
     public GameObject sadPrefab;
     public GameObject angryPrefab;
     private GameObject emotionPrefab;
-    public List<GameObject> generatedObjects;
 
     public void SetEmotion(string emotion)
     {
@@ -46,7 +44,7 @@ public class EmotionMap : MonoBehaviour
 
     }
 
-    public void SetObjects()
+    public void SetObjects(List<GameObject> generatedObjects)
     {
 
         Transform[] positions = emotionPrefab.GetComponent<IEmotionScene>().Get3DPositions();
