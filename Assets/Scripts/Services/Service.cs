@@ -58,8 +58,9 @@ public class Service
         else
         {
             Debug.Log($"Response: {request.downloadHandler.text}");
-            // callback(JsonUtility.FromJson(request.downloadHandler.text, responseType)); 
+            Debug.Log($"responseType: {responseType}");
             callback(JsonConvert.DeserializeObject(request.downloadHandler.text, responseType));
+            
         }
 
     }

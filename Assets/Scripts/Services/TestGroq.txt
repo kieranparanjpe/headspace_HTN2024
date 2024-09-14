@@ -5,6 +5,7 @@ using UnityEngine;
 public class TestGroq : MonoBehaviour
 {
     private const string envFile = "Assets/local.env";
+    private string test_journal = "Today I ate 3 chicken legs. I got the oil grease on my laptop keyboard, and my hackathon event is about to end. I have not get much things done yet.";
 
     void Start()
     {
@@ -13,12 +14,12 @@ public class TestGroq : MonoBehaviour
 
         GroqService groqService = new GroqService(this);
         
-        groqService.GetResponse("Hi how are you doing?", callback);
+        groqService.GetResponse(test_journal, DisplayGroq);
 
     }
 
-    public void callback(string s) {
-
+    public void DisplayGroq(string s) {
+        Debug.Log("Groq Said: " + s);
     }
 
 }
