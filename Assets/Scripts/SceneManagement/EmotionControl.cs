@@ -2,28 +2,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
-public class Anger : IEmotionScene
+public class EmotionControl : MonoBehaviour, IEmotionScene
 {
     public List<GameObject> prefabObjects;
-    public Transform t1;
-    public Transform t2;
+    public Transform[] preplannedPositions;
+    public List<Particle> particles;
 
     public Transform[] Get3DPositions()
     {
-        return new Transform[]
-        {
-            t1,t2
-        };
+        return preplannedPositions;
     }
 
     public List<Particle> GetParticles()
     {
-        return new List<Particle>
-        {
-            new Particle(), 
-            new Particle(),
-            new Particle()
-        };
+        return particles;
     }
 
     public List<GameObject> Prefabs
