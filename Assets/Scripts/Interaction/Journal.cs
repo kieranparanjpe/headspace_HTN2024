@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 
 public class Journal : Interactable
 {
+    private bool journalOpen;
+    [SerializeField] private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
-        
+        journalOpen = false;
     }
 
     // Update is called once per frame
@@ -16,13 +19,10 @@ public class Journal : Interactable
         
     }
 
-    public override void Interact()
+    protected override void Interact()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Debug.Log("Journal Opened.");
-            //play animation, stop at frame 60.
+        journalOpen = !journalOpen;
+        animator.SetBool("isOpen", journalOpen);
 
-        }
     }
 }

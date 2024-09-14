@@ -27,7 +27,11 @@ public class PlayerInteract : MonoBehaviour
             if (i != null)
             {
                 playerUI.UpdateText(hitInfo.collider.GetComponent<Interactable>().promptMessage);
-                i.Interact();
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    i.BaseInteract();
+
+                }
             }
         }
     }
