@@ -12,6 +12,7 @@ public class GroqService
     private string clientID;
     private string clientSecret;
     private string system_prompt;
+
     private string user_prompt;
 
     private const string apiRoute = "https://api.groq.com/openai/v1/chat/completions";
@@ -22,9 +23,8 @@ public class GroqService
         clientSecret = Environment.GetEnvironmentVariable("GROQ_CLIENT_SECRET");
     }
 
-    public void GetResponse(string user_prompt, System.Action<List<GroqObject>> callback)
+    public void GetResponse(string system_prompt, string user_prompt, System.Action<List<GroqObject>> callback)
     {
-        system_prompt = "Your job is design a space which will reflect, support and complement the mood, content, emotional state and vibe of a given journal entry. The prompt you receive will be this journal entry. You will do this by generating a list of objects that might contribute to this environment. Each object should be cohesive, and make sense together with all the other objects. You will also need to determine the position of each object in 3D space using XYZ coordinates, where X is horizontal, Y is vertical, and Z is depth, and a unit of 1 corresponds to 1 meter. You will also return the orientation of the object using euler angles, with each value being between 0 and 360 degrees. You will return your answer in the JSON format as a list, with each list element having the following attributes: name:string, description:string, position:[float,float,float], rotation [float,float,float]. You will return only the json information, you message should contain nothing else."; 
         GroqMessage[] messages = {new GroqMessage("system", system_prompt), new GroqMessage("user", user_prompt),};
 
         Debug.Log("Groq Request JSON = " + messages);
