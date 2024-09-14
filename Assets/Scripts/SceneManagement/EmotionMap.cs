@@ -8,6 +8,8 @@ public class EmotionMap : MonoBehaviour
 {
 
     public GameObject grassPrefab;
+    public GameObject rainPrefab;
+
 
     public GameObject happyPrefab;
     public GameObject sadPrefab;
@@ -29,6 +31,7 @@ public class EmotionMap : MonoBehaviour
 
             case "sad":
                 Instantiate(sadPrefab);
+                Instantiate(rainPrefab);
                 break;
 
             default:
