@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>PvRecorder</id>
+    <version>1.2.6</version>
+    <authors>Picovoice</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">Apache-2.0</license>
+    <licenseUrl>https://licenses.nuget.org/Apache-2.0</licenseUrl>
+    <icon>pv_circle_512.png</icon>
+    <projectUrl>https://github.com/Picovoice/pvrecorder</projectUrl>
+    <description>PvRecorder is a cross-platform audio recorder for .NET designed for real-time processing.</description>
+    <releaseNotes>See https://github.com/Picovoice/pvrecorder/</releaseNotes>
+    <copyright>Picovoice 2021-2024</copyright>
+    <tags>audio, audio recorder, audio capture, audio recording, audio processing, real-time processing</tags>
+    <repository type="git" url="https://github.com/Picovoice/pvrecorder.git" commit="16295ad7b92874c178e341b1f2f7b43b0d312483" />
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.0" />
+      <group targetFramework="net6.0" />
+      <group targetFramework="net8.0" />
+      <group targetFramework=".NETStandard2.0" />
+    </dependencies>
+  </metadata>
+</package>

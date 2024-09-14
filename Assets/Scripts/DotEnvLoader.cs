@@ -19,10 +19,12 @@ public class DotEnvLoader
                 if (string.IsNullOrWhiteSpace(line) || line.StartsWith("#")) // Skip empty lines and comments
                     continue;
                     
-                var parts = line.Split('=');
-                if (parts.Length == 2)
+                int index = line.IndexOf('=');
+                if (index >= 0 && index < line.Length)
                 {
-                    Environment.SetEnvironmentVariable(parts[0], parts[1]);
+                    string p1 = line.Substring(0, index);
+                    string p2 = line.Substring(index + 1);
+                    Environment.SetEnvironmentVariable(p1, p2);
                 }
             }
         }
