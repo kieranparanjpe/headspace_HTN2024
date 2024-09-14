@@ -11,6 +11,9 @@ public class GroqService
     private MonoBehaviour obj;
     private string clientID;
     private string clientSecret;
+    private string system_prompt;
+    private string user_prompt;
+
     private const string apiRoute = "https://api.groq.com/openai/v1/chat/completions";
 
     public GroqService(MonoBehaviour obj)
@@ -26,8 +29,10 @@ public class GroqService
         //     new GroqMessage { role = "user", content = prompt }
         // };
 
+        system_prompt = "Your job is design a space which will reflect, support and complement the mood, content, emotional state and vibe of a given journal entry. The prompt you receive will be this journal entry. You will do this by generating a list of objects that might contribute to this environment. Each object should be cohesive, and make sense together with all the other objects. You will also need to determine the position of each object in 3D space using XYZ coordinates, where X is horizontal, Y is vertical, and Z is depth, and a unit of 1 corresponds to 1 meter. You will also return the orientation of the object using euler angles, with each value being between 0 and 360 degrees. You will return your answer in the JSON format as a list, with each list element having the following attributes: name:string, description:string, position:[float,float,float], rotation [float,float,float]. You will return only the json information, you message should contain nothing else.";
+        user_prompt = "Today I ate 3 chicken legs. I got the oil grease on my laptop keyboard, and my hackathon event is about to end. I have not get much things done yet.";
  
-        GroqMessage[] messages = {new GroqMessage("user", "test"), };
+        GroqMessage[] messages = {new GroqMessage("system", system_prompt), new GroqMessage("user", user_prompt),};
 
         Debug.Log(messages);
         GroqRequest req = new GroqRequest(messages, "llama3-8b-8192");
@@ -61,8 +66,6 @@ public class GroqMessage
         this.role = role;
         this.content = content;
     }
-
-
 }
 
 [System.Serializable]
