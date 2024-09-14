@@ -76,7 +76,7 @@ public class Service : MonoBehaviour
     }
 
     // POST Request
-    public IEnumerator PostRequest(string apiKeyName, string url, object jsonData)
+    public IEnumerator PostRequest(string apiKeyName, string url, object jsonData, System.Action<object> callback)
     {
         string apiKey = GetApiKey(apiKeyName);
         if (string.IsNullOrEmpty(apiKey))
@@ -87,6 +87,7 @@ public class Service : MonoBehaviour
 
         // Serialize the JSON object
         string jsonPayload = JsonUtility.ToJson(jsonData);
+        JsonUtility.FromJson()
 
         // Create UnityWebRequest for POST with JSON data
         UnityWebRequest request = new UnityWebRequest(url, "POST");
@@ -107,5 +108,6 @@ public class Service : MonoBehaviour
         {
             Debug.Log($"Response: {request.downloadHandler.text}");
         }
+
     }
 }
