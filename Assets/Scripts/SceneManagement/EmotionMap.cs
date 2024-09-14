@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 public class EmotionMap : MonoBehaviour
 {
-    public GameObject grassPrefab;
     public GameObject rainPrefab;
     public Material angrySkybox;
     public GameObject initialFloor;
@@ -22,7 +21,6 @@ public class EmotionMap : MonoBehaviour
         {
             case "happy":
                 emotionPrefab = Instantiate(happyPrefab);
-                InstantiateGrass();                
                 break;
 
             case "anger":
@@ -59,19 +57,5 @@ public class EmotionMap : MonoBehaviour
 
     }
 
-    private void InstantiateGrass()
-    {
-        if (grassPrefab == null)
-        {
-            Debug.LogError("Missing grass prefab");
-            return;
-        }
-
-        for (int i = 0; i < 50; i++)
-        {
-            Vector3 randomPosition = new Vector3(UnityEngine.Random.Range(-10, 10), 0, Random.Range(-10, 10));
-            Instantiate(grassPrefab, randomPosition, Quaternion.identity);
-        }
-    }
 
 }
