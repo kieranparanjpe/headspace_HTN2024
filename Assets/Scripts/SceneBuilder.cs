@@ -8,6 +8,8 @@ public class SceneBuilder : MonoBehaviour
     public List<GameObject> spawnedObjects = new List<GameObject>();
     private const string envFile = "Assets/local.env";
     private string system_prompt_objects;
+
+    private int postionIndex = 0;
     private string test_journal = "Today I ate 3 chicken legs. I got the oil grease on my laptop keyboard, and my hackathon event is about to end. I have not got much things done yet.";
 
     public EmotionMap emotionMap;
@@ -44,12 +46,12 @@ public class SceneBuilder : MonoBehaviour
     public void NewObject(GameObject obj, int i)
     {
         print($"spawned object {i}");
-        //obj.SetActive(true);
+        obj.SetActive(true);
         //obj.transform.position = position;
         //obj.transform.eulerAngles = rotation;
         
         spawnedObjects.Add(obj);
-        emotionMap.SetObject(obj, i);
+        emotionMap.SetObject(obj, postionIndex ++);
     }
 
 }
