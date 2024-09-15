@@ -29,7 +29,7 @@ public class GroqService
     {
         GroqMessage[] messages = {new GroqMessage("system", system_prompt), new GroqMessage("user", user_prompt),};
 
-        Debug.Log("Groq Request JSON = " + messages);
+        Debug.Log("Groq Request JSON = " + string.Join<GroqMessage>(", ", messages));
         GroqRequest req = new GroqRequest(messages, "llama3-8b-8192");
 
         obj.StartCoroutine(Service.PostRequest(apiRoute, clientSecret, req, o => { ParseResponse((GroqResponse)o, callback); }, typeof(GroqResponse)));

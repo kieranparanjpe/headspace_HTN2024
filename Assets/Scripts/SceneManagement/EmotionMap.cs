@@ -30,7 +30,7 @@ public class EmotionMap : MonoBehaviour
 
             case "sad":
                 this.emotionPrefab = Instantiate(sadPrefab);
-                Instantiate(rainPrefab);
+                //Instantiate(rainPrefab);
                 break;
 
             default:
@@ -61,7 +61,7 @@ public class EmotionMap : MonoBehaviour
         Transform[] positions = emotionPrefab.GetComponent<IEmotionScene>().Get3DPositions();
 
         Debug.Log(i);
-
+        i %= positions.Length;
         if(i < positions.Length)
         {
             obj.transform.SetParent(positions[i].transform, false);

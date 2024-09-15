@@ -246,6 +246,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 340197914854545998}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &528502426 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6422640066653421870, guid: f8bfb61f2cd2ac44e930368a3a03cb49,
+    type: 3}
+  m_PrefabInstance: {fileID: 1483882965}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &741723413
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,6 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnedObjects: []
+  player: {fileID: 528502426}
   emotionMap: {fileID: 1067698682}
 --- !u!1 &1348545364
 GameObject:

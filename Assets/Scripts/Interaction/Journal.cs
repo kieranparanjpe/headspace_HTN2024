@@ -41,13 +41,11 @@ public class Journal : Interactable
 
     protected override void Interact()
     {
-        Debug.Log("hi");
         journalOpen = !journalOpen;
         if (journalOpen)
             pv.OpenJournal();
         else
             pv.CloseJournal();
-        Debug.Log(journalOpen);
         animator.SetBool("isOpen", journalOpen);
         StartCoroutine(FadeText());
 
