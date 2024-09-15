@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float speed;
-    [SerializeField] private float drag;
+    [SerializeField] private float accel;
 
     [SerializeField] private Transform orientation;
 
@@ -22,15 +22,15 @@ public class PlayerMovement : MonoBehaviour
         //set rigidbody info
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        rb.drag = drag;
     }
 
     private void Update()
     {
-        getInput();
+        //getInput();
     }
     private void FixedUpdate()
     {
+        getInput();
         MovePlayer();
     }
     private void getInput()
@@ -44,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
     {
         //always move in direction that camera is facing
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
-        rb.AddForce(moveDirection.normalized * speed * 10f, ForceMode.Force);
+        rb.velocity = speed * moveDirection + Vector3.up * rb.velocity.y;
     }
 }
