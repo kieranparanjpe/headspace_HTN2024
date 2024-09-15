@@ -43,22 +43,22 @@ public class GroqService
             try
             {
                 string jsonContent = response.choices[0].message.content;
-                
+                Debug.Log("Json COnent = "+jsonContent);
                 List<GroqObject> objects = JsonUtility.FromJson<GroqObjectList>("{\"objects\":" + jsonContent + "}").objects;
-
+                Debug.Log("objects = " + objects.Count);
                 callback(objects);
             }
             catch (Exception e)
             {
                 Debug.LogError($"Error parsing JSON: {e.Message}");
-                callback(null);
+                // callback(null);
             }
         }
         else
         {
             Debug.LogError("Failed to get a valid response from Groq.");
             Debug.Log($"Groq Response = {response.choices}");
-            callback(null);
+            // callback(null);
         }
     }
 

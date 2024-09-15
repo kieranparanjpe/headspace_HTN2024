@@ -21,22 +21,22 @@ public class EmotionMap : MonoBehaviour
         switch (emotion.ToLower())
         {
             case "happy":
-                emotionPrefab = Instantiate(happyPrefab);
+                this.emotionPrefab = Instantiate(happyPrefab);
                 InstantiateGrass();                
                 break;
 
             case "anger":
                 RenderSettings.skybox = angrySkybox;
-                emotionPrefab = Instantiate(angryPrefab);
+                this.emotionPrefab = Instantiate(angryPrefab);
                 break;
 
             case "sad":
-                emotionPrefab = Instantiate(sadPrefab);
+                this.emotionPrefab = Instantiate(sadPrefab);
                 Instantiate(rainPrefab);
                 break;
 
             default:
-                emotionPrefab = Instantiate(sadPrefab);
+                this.emotionPrefab = Instantiate(sadPrefab);
                 Debug.LogError($"Emotion '{emotion}' not recognized!");
                 break;
         }
@@ -47,7 +47,7 @@ public class EmotionMap : MonoBehaviour
     public void SetObjects(List<GameObject> generatedObjects)
     {
 
-        Transform[] positions = emotionPrefab.GetComponent<IEmotionScene>().Get3DPositions();
+        Transform[] positions = this.emotionPrefab.GetComponent<IEmotionScene>().Get3DPositions();
         for (int i = 0; i < generatedObjects.Count; i++)
         {
             if(i < positions.Length)
@@ -57,6 +57,20 @@ public class EmotionMap : MonoBehaviour
             }
         }
 
+    }
+
+    public void SetObject(GameObject obj, int i){
+        Transform[] positions = emotionPrefab.GetComponent<IEmotionScene>().Get3DPositions();
+
+        Debug.Log(i);
+
+        if(i < positions.Length)
+        {
+            obj.transform.SetParent(positions[i].transform, false);
+            obj.transform.position = positions[i].transform.position;
+            Debug.Log(positions[i].transform.position);
+        }
+        
     }
 
     private void InstantiateGrass()
