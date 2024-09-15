@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float speed;
-    [SerializeField] private float drag;
+    [SerializeField] private float drag = 0;
 
     [SerializeField] private Transform orientation;
 
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //always move in direction that camera is facing
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
-        rb.AddForce(moveDirection.normalized * speed * 10f, ForceMode.Force);
+        rb.velocity = speed * moveDirection + rb.velocity.y * Vector3.up;
+        //rb.AddForce(moveDirection.normalized * speed * 10f, ForceMode.Force);
     }
 }
