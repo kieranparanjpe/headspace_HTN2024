@@ -47,7 +47,12 @@ public class Picovoice : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.V) && !recorder.IsRecording)
                 recorder.Start();
             if (Input.GetKeyUp(KeyCode.V) && recorder.IsRecording)
+            {
+                CheetahTranscript finalTranscriptObj = cheetah.Flush();
+                Transcript += finalTranscriptObj.Transcript;
                 recorder.Stop();
+
+            }
 
             if (Input.GetKeyDown(KeyCode.C))
                 Transcript = "";
