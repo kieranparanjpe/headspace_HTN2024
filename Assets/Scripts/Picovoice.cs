@@ -14,10 +14,15 @@ public class Picovoice : MonoBehaviour
     private PvRecorder recorder = null;
     public string Transcript { get; private set; } = "";
 
+    private bool keyboardMode = false;
+
+    public PlayerMovement playerMovement;
+
     public SceneBuilder sb;
 
     private string modelPath =
         "./Assets/Packages/Picovoice.Cheetah.2.0.1/build/netstandard2.0/lib/common/cheetah_params.pv";
+    private string typedText = "";
 
     public void Start()
     {
@@ -44,31 +49,66 @@ public class Picovoice : MonoBehaviour
     {
         if (journalOpen)
         {
-            if (Input.GetKeyDown(KeyCode.V) && !recorder.IsRecording)
-                recorder.Start();
-            if (Input.GetKeyUp(KeyCode.V) && recorder.IsRecording)
+            if (keyboardMode)
             {
-                CheetahTranscript finalTranscriptObj = cheetah.Flush();
-                Transcript += finalTranscriptObj.Transcript;
-                recorder.Stop();
 
+
+
+                if (Input.GetKeyDown(KeyCode.Backspace))
+                {
+                    if (typedText.Length > 0)
+                    {
+                        typedText = typedText.Substring(0, typedText.Length - 1);
+                    }
+                }
+                else
+                {
+                    typedText += Input.inputString;
+                    Transcript = typedText;
+                }
+
+                if (Input.GetKeyDown(KeyCode.Return))  
+                {
+                    playerMovement.speed = 7;
+                    sb.StartJournal(Transcript);
+                }
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    keyboardMode = false;
+                }
             }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.V) && !recorder.IsRecording)
+                    recorder.Start();
+                if (Input.GetKeyUp(KeyCode.V) && recorder.IsRecording)
+                {
+                    CheetahTranscript finalTranscriptObj = cheetah.Flush();
+                    Transcript += finalTranscriptObj.Transcript;
+                    //recorder.Stop();
+                }
 
-            if (Input.GetKeyDown(KeyCode.C))
-                Transcript = "";
+                if (Input.GetKeyDown(KeyCode.C))
+                    Transcript = "";
+
+                if (Input.GetKey(KeyCode.V))
+                    PVProcess();
+                if (Input.GetKeyDown(KeyCode.G))
+                    sb.StartJournal(Transcript);
+                if (Input.GetKeyDown(KeyCode.K))
+                {
+                    keyboardMode = true;
+                    playerMovement.speed = 0;
+                }
+            }
             
-            if (Input.GetKey(KeyCode.V))
-                PVProcess();
-            if (Input.GetKeyDown(KeyCode.G))
-                sb.StartJournal(Transcript);
-                
         }
-        else if (recorder.IsRecording)
+        else if (recorder.IsRecording && !keyboardMode)
         {
             recorder.Stop();
         }
         
-        if (journalOpen && Input.GetKeyDown(KeyCode.V))
+        if (journalOpen && Input.GetKeyDown(KeyCode.V) && !keyboardMode)
             PVProcess();
     }
 

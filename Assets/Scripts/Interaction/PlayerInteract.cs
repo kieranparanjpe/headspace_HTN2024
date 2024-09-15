@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
@@ -32,8 +31,9 @@ public class PlayerInteract : MonoBehaviour
                 playerUI.UpdateText(hitInfo.collider.GetComponent<Interactable>().promptMessage);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    i.BaseInteract();
+                        i.BaseInteract();
                 }
+                
             }
         }
     }

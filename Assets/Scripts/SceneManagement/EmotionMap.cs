@@ -15,22 +15,27 @@ public class EmotionMap : MonoBehaviour
     public GameObject happyPrefab;
     public GameObject sadPrefab;
     public GameObject angryPrefab;
+    public GameObject ambiantNoice;
     private GameObject emotionPrefab;
 
     public void SetEmotion(string emotion)
     {
+        ambiantNoice.SetActive(false);
         switch (emotion.ToLower())
         {
             case "happy":
+            case "happiness":
                 this.emotionPrefab = Instantiate(happyPrefab);
                 break;
 
             case "anger":
+            case "angry":
                 RenderSettings.skybox = angrySkybox;
                 this.emotionPrefab = Instantiate(angryPrefab);
                 break;
 
             case "sad":
+            case "sadness":
                 RenderSettings.skybox = sadSkybox;
                 this.emotionPrefab = Instantiate(sadPrefab);
                 //Instantiate(rainPrefab);
