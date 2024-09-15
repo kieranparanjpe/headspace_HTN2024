@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 public class EmotionMap : MonoBehaviour
 {
-    public GameObject grassPrefab;
     public GameObject rainPrefab;
     public Material angrySkybox;
     public GameObject initialFloor;
