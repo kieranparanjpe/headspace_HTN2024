@@ -72,7 +72,7 @@ public class SloydResponse
 {
     public string InteractionId;
     public string Name;
-    public int ConfidenceScore;
+    public double ConfidenceScore;
     public string ModelOutputType;
     public string ResponseEncoding;
     public string ModelData;
