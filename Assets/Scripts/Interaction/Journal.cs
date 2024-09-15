@@ -31,7 +31,7 @@ public class Journal : Interactable
             if (Input.GetKeyDown(KeyCode.E) && !keyboardMode)
             {
                 Interact();
-            }else if (Input.GetKeyDown(KeyCode.G))
+            }else if (Input.GetKeyDown(KeyCode.G) && !keyboardMode)
             {
                 Interact();
             }

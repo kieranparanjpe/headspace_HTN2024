@@ -52,8 +52,20 @@ public class Picovoice : MonoBehaviour
             if (keyboardMode)
             {
 
-                typedText += Input.inputString;
-                Transcript = typedText;
+
+
+                if (Input.GetKeyDown(KeyCode.Backspace))
+                {
+                    if (typedText.Length > 0)
+                    {
+                        typedText = typedText.Substring(0, typedText.Length - 1);
+                    }
+                }
+                else
+                {
+                    typedText += Input.inputString;
+                    Transcript = typedText;
+                }
 
                 if (Input.GetKeyDown(KeyCode.Return))  
                 {
@@ -73,7 +85,7 @@ public class Picovoice : MonoBehaviour
                 {
                     CheetahTranscript finalTranscriptObj = cheetah.Flush();
                     Transcript += finalTranscriptObj.Transcript;
-                    recorder.Stop();
+                    //recorder.Stop();
                 }
 
                 if (Input.GetKeyDown(KeyCode.C))
@@ -91,12 +103,12 @@ public class Picovoice : MonoBehaviour
             }
             
         }
-        else if (recorder.IsRecording)
+        else if (recorder.IsRecording && !keyboardMode)
         {
             recorder.Stop();
         }
         
-        if (journalOpen && Input.GetKeyDown(KeyCode.V))
+        if (journalOpen && Input.GetKeyDown(KeyCode.V) && !keyboardMode)
             PVProcess();
     }
 
