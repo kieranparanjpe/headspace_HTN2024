@@ -8,7 +8,7 @@ public class EmotionTester : MonoBehaviour
     public EmotionMap map;
     void Start()
     {
-        map.SetEmotion("anger");
+        map.SetEmotion("sad");
         List<GameObject> list = new List<GameObject>();
         gameObjects.ForEach(gameObject => { 
             list.Add(Instantiate(gameObject));

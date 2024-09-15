@@ -75,12 +75,12 @@ public class SceneBuilder : MonoBehaviour
     public void NewObject(GameObject obj, int i)
     {
         print($"spawned object {i}");
-        //obj.SetActive(true);
+        obj.SetActive(true);
         //obj.transform.position = position;
         //obj.transform.eulerAngles = rotation;
         
         spawnedObjects.Add(obj);
-        emotionMap.SetObject(obj, i);
+        emotionMap.SetObject(obj, postionIndex ++);
     }
 
 }
