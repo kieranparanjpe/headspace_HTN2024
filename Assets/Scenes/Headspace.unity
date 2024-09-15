@@ -363,6 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a98080bbf512b54aba19b83c1999bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameObjects: []
   map: {fileID: 1447069074}
 --- !u!4 &591564727 stripped
 Transform:
