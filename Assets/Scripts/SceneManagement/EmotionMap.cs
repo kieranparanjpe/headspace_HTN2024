@@ -21,7 +21,6 @@ public class EmotionMap : MonoBehaviour
         {
             case "happy":
                 this.emotionPrefab = Instantiate(happyPrefab);
-                InstantiateGrass();                
                 break;
 
             case "anger":
@@ -72,19 +71,6 @@ public class EmotionMap : MonoBehaviour
         
     }
 
-    private void InstantiateGrass()
-    {
-        if (grassPrefab == null)
-        {
-            Debug.LogError("Missing grass prefab");
-            return;
-        }
-
-        for (int i = 0; i < 50; i++)
-        {
-            Vector3 randomPosition = new Vector3(UnityEngine.Random.Range(-10, 10), 0, Random.Range(-10, 10));
-            Instantiate(grassPrefab, randomPosition, Quaternion.identity);
-        }
-    }
+    
 
 }
