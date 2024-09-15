@@ -16,6 +16,7 @@ public class SceneBuilder : MonoBehaviour
     //private string test_journal = "Today I ate 3 chicken legs. I got the oil grease on my laptop keyboard, and my hackathon event is about to end. I have not got much things done yet.";
     private string system_prompt_emotions = "";
     public EmotionMap emotionMap;
+    public Loading loader;
     void Awake()
     {
         DotEnvLoader.LoadEnvFile(envFile);
@@ -23,6 +24,7 @@ public class SceneBuilder : MonoBehaviour
 
     public void StartJournal(string journal)
     {
+        loader.StartLoading();
         player.position = new Vector3(0, 10, 0);
         sloydService = new SloydService(this);
         GroqService groqService = new GroqService(this);
@@ -57,6 +59,7 @@ public class SceneBuilder : MonoBehaviour
             return;
         }
         Debug.Log(emotion);
+        loader.StopLoading();
         emotionMap.SetEmotion(emotion);
         // Stop Loading
     }

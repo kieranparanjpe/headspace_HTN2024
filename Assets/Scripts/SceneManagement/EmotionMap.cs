@@ -66,6 +66,12 @@ public class EmotionMap : MonoBehaviour
         {
             obj.transform.SetParent(positions[i].transform, false);
             obj.transform.position = positions[i].transform.position;
+            
+            // F U N F A C T O R
+            GameObject objCopy = Instantiate(obj, obj.transform.position + new Vector3(0,200,0), obj.transform.rotation);
+            objCopy.AddComponent<Rigidbody>();
+            objCopy.AddComponent<BoxCollider>();
+            
             Debug.Log(positions[i].transform.position);
         }
         
