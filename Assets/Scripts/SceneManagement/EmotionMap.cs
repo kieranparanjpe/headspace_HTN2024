@@ -8,7 +8,9 @@ using Random = UnityEngine.Random;
 public class EmotionMap : MonoBehaviour
 {
     public GameObject rainPrefab;
-    public Material angrySkybox;
+    [SerializeField] private Material angrySkybox;
+    [SerializeField]  private Material sadSkybox;
+
     public GameObject initialFloor;
     public GameObject happyPrefab;
     public GameObject sadPrefab;
@@ -29,6 +31,7 @@ public class EmotionMap : MonoBehaviour
                 break;
 
             case "sad":
+                RenderSettings.skybox = sadSkybox;
                 this.emotionPrefab = Instantiate(sadPrefab);
                 //Instantiate(rainPrefab);
                 break;
