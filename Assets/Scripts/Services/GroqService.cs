@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GroqService
@@ -23,16 +25,52 @@ public class GroqService
         clientSecret = Environment.GetEnvironmentVariable("GROQ_CLIENT_SECRET");
     }
 
-    public void GetResponse(string system_prompt, string user_prompt, System.Action<List<GroqObject>> callback)
+    public void GetObjects(string system_prompt, string user_prompt, System.Action<List<GroqObject>> callback)
     {
         GroqMessage[] messages = {new GroqMessage("system", system_prompt), new GroqMessage("user", user_prompt),};
 
         Debug.Log("Groq Request JSON = " + messages);
         GroqRequest req = new GroqRequest(messages, "llama3-8b-8192");
-        obj.StartCoroutine(Service.PostRequest(apiRoute, clientSecret, req, o => {ParseResponse((GroqResponse)o, callback); }, typeof(GroqResponse)));
 
+        obj.StartCoroutine(Service.PostRequest(apiRoute, clientSecret, req, o => { ParseResponse((GroqResponse)o, callback); }, typeof(GroqResponse)));
     }
 
+    public void GetEmotion(string system_prompt, string user_prompt, System.Action<string> callback)
+    {
+        GroqMessage[] messages = { new GroqMessage("system", system_prompt), new GroqMessage("user", user_prompt) };
+
+        GroqRequest req = new GroqRequest(messages, "llama3-8b-8192");
+
+        obj.StartCoroutine(Service.PostRequest(apiRoute, clientSecret, req, o => { ParseEmotion((GroqResponse)o, callback); }, typeof(GroqResponse)));
+    }
+
+    private void ParseEmotion(GroqResponse response, System.Action<string> callback)
+    {
+        Debug.Log("Emotion " + response);    
+
+        if (response != null && response.choices != null)
+        {
+            Debug.Log("Groq Response: " + response.choices[0].message.content);
+
+            // Parse JSON response
+            try
+            {
+                string content = response.choices[0].message.content;
+                callback(content);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Error parsing JSON: {e.Message}");
+                // callback(null);
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to get a valid response from Groq.");
+            Debug.Log($"Groq Response = {response.choices}");
+            // callback(null);
+        }
+    }
     private void ParseResponse(GroqResponse response, System.Action<List<GroqObject>> callback)
     {
         if (response != null && response.choices != null && response.choices.Length > 0)
