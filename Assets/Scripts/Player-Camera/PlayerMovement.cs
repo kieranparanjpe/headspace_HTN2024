@@ -28,6 +28,10 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         getInput();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(Vector3.up * 500);
+        }
     }
     private void FixedUpdate()
     {
