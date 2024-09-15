@@ -818,43 +818,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1432697221}
   m_SourcePrefab: {fileID: 100100000, guid: 786cc579fcc454e4ba25751f2ad62293, type: 3}
---- !u!1 &354038470 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4051045148141896057, guid: 12a6b17858bc4ba4492cb1da62326cf4,
-    type: 3}
-  m_PrefabInstance: {fileID: 7597243970050805611}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &354038474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 354038470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ff79108e93c1bc468e3fc1bb3f27df9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 1850477737}
-  rayDistance: 5
-  journal: {fileID: 704596499}
-  mask:
-    serializedVersion: 2
-    m_Bits: 8
---- !u!114 &354038475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 354038470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 174e7a0fa19a5f94698d8b59fa3dbcc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  promptText: {fileID: 1030006736}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2191,33 +2154,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1205942574751734751, guid: 12a6b17858bc4ba4492cb1da62326cf4,
+        type: 3}
+      propertyPath: promptText
+      value: 
+      objectReference: {fileID: 1030006736}
     - target: {fileID: 4277028643883942852, guid: 12a6b17858bc4ba4492cb1da62326cf4,
         type: 3}
       propertyPath: m_Name
       value: PlayerManager
       objectReference: {fileID: 0}
-    - target: {fileID: 6043094169518548768, guid: 12a6b17858bc4ba4492cb1da62326cf4,
+    - target: {fileID: 4965681353611831714, guid: 12a6b17858bc4ba4492cb1da62326cf4,
         type: 3}
-      propertyPath: m_Height
-      value: 2.37
-      objectReference: {fileID: 0}
-    - target: {fileID: 6043094169518548768, guid: 12a6b17858bc4ba4492cb1da62326cf4,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.6
-      objectReference: {fileID: 0}
+      propertyPath: journal
+      value: 
+      objectReference: {fileID: 704596499}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4051045148141896057, guid: 12a6b17858bc4ba4492cb1da62326cf4,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 354038474}
-    - targetCorrespondingSourceObject: {fileID: 4051045148141896057, guid: 12a6b17858bc4ba4492cb1da62326cf4,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 354038475}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12a6b17858bc4ba4492cb1da62326cf4, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

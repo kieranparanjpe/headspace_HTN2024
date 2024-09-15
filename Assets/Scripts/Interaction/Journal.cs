@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using TMPro;
 using UnityEngine;
 
 public class Journal : Interactable
@@ -10,6 +11,8 @@ public class Journal : Interactable
     private bool canCloseJournal;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject pageText;
+    public Picovoice pv;
+    public TextMeshProUGUI rightText = null;
 
     // Start is called before the first frame update
     void Start()
@@ -30,8 +33,9 @@ public class Journal : Interactable
             }else if (Input.GetKeyDown(KeyCode.G))
             {
                 Interact();
-                //generate world !!!!!!!! Fill this in
             }
+
+            rightText.text = pv.Transcript;
         }
     }
 
@@ -39,6 +43,10 @@ public class Journal : Interactable
     {
         Debug.Log("hi");
         journalOpen = !journalOpen;
+        if (journalOpen)
+            pv.OpenJournal();
+        else
+            pv.CloseJournal();
         Debug.Log(journalOpen);
         animator.SetBool("isOpen", journalOpen);
         StartCoroutine(FadeText());

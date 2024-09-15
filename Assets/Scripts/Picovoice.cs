@@ -12,7 +12,9 @@ public class Picovoice : MonoBehaviour
     private string accessKey = "";
     Cheetah cheetah = null;
     private PvRecorder recorder = null;
-    public string Transcript { private get; set; } = "";
+    public string Transcript { get; private set; } = "";
+
+    public SceneBuilder sb;
 
     private string modelPath =
         "./Assets/Packages/Picovoice.Cheetah.2.0.1/build/netstandard2.0/lib/common/cheetah_params.pv";
@@ -52,6 +54,9 @@ public class Picovoice : MonoBehaviour
             
             if (Input.GetKey(KeyCode.V))
                 PVProcess();
+            if (Input.GetKeyDown(KeyCode.G))
+                sb.StartJournal(Transcript);
+                
         }
         else if (recorder.IsRecording)
         {
