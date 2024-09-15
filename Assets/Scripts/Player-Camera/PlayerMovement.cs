@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float speed;
+    [SerializeField] public float speed;
     [SerializeField] private float drag = 0;
 
     [SerializeField] private Transform orientation;
@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveDirection;
 
     private Rigidbody rb;
+    private bool keyboardMode = false;
 
     private void Start()
     {
@@ -28,9 +29,17 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         getInput();
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !keyboardMode)
         {
             rb.AddForce(Vector3.up * 500);
+        }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            keyboardMode = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            keyboardMode = false;
         }
     }
     private void FixedUpdate()

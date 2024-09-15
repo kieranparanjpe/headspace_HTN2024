@@ -13,6 +13,7 @@ public class Journal : Interactable
     [SerializeField] private GameObject pageText;
     public Picovoice pv;
     public TextMeshProUGUI rightText = null;
+    private bool keyboardMode = false;
 
     // Start is called before the first frame update
     void Start()
@@ -27,12 +28,20 @@ public class Journal : Interactable
     {
         if (journalOpen && canCloseJournal)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && !keyboardMode)
             {
                 Interact();
             }else if (Input.GetKeyDown(KeyCode.G))
             {
                 Interact();
+            }
+            else if (Input.GetKeyDown(KeyCode.K))
+            {
+                keyboardMode = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                keyboardMode = false;
             }
 
             rightText.text = pv.Transcript;
